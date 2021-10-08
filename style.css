@@ -16,11 +16,11 @@ body {
 }
 
 .container {
-  padding: 20px 70px;
   color: #fff;
 }
 
 .current-info {
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -136,7 +136,7 @@ body {
 }
 
 @media only screen and (max-width: 730px) {
-  .container {
+  .current-info {
     padding: 20px;
   }
 
