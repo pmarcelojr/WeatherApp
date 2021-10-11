@@ -39,7 +39,7 @@ function getWeatherData() {
 }
 
 function showWeatherData(data) {
-    let { humidity, pressure, sunrise, sunset, wind_speed } = data.current;
+    let { humidity, pressure, sunrise, sunset, wind_speed, temp } = data.current;
     let { timezone } = data;
 
     timeEl.innerHTML = data.timezone;
@@ -51,7 +51,12 @@ function showWeatherData(data) {
     `
 
     currentWeatherItemsEl.innerHTML =     
-    `<div class="weather-item">
+    `
+    <div class="weather-item">
+        <div>Tempo</div>
+        <div>${temp} &#176;C|&#176;F</div>
+    </div>
+    <div class="weather-item">
         <div>Umidade</div>
         <div>${humidity}%</div>
     </div>
@@ -63,15 +68,12 @@ function showWeatherData(data) {
         <div>Vento</div>
         <div>${wind_speed} km/h</div>
     </div>
-    <div class="weather-item">
-        <div>Nascer do Sol</div>
-        <div>${window.moment(sunrise * 1000).format('HH:mm a')}</div>
-    </div>
-    <div class="weather-item">
-        <div>Pôr do Sol</div>
-        <div>${window.moment(sunset * 1000).format('HH:mm a')}</div>
-    </div>
     `;
+
+    // <div class="weather-item">
+    //     <div>Nascer do Sol</div>
+    //     <div>${window.moment(sunrise * 1000).format('HH:mm a')}</div>
+    // </div>
 
     let otherDayForcast = ' '
     data.daily.forEach((day, idx) => {
@@ -80,8 +82,8 @@ function showWeatherData(data) {
                 <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png" alt="weather icon" class="w-icon">
                 <div class="other">
                     <div class="day">${window.moment(day.dt * 1000).format('ddd')}</div>
-                    <div class="temp">Dia ${day.temp.day} &#176; C</div>
-                    <div class="temp">Noite ${day.temp.night}&#176; C</div>
+                    <div class="temp">Dia ${day.temp.day} &#176;C</div>
+                    <div class="temp">Noite ${day.temp.night} &#176;C</div>
                 </div>
             `
         } else {
@@ -89,8 +91,8 @@ function showWeatherData(data) {
             <div class="weather-forecast-item">
                 <div class="day">${window.moment(day.dt * 1000).format('ddd')}</div>
                 <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" class="w-icon">
-                <div class="temp">Dia - ${day.temp.day}&#176; C</div>
-                <div class="temp">Noite - ${day.temp.night}&#176; C</div>
+                <div class="temp">Dia - ${day.temp.day} &#176;C</div>
+                <div class="temp">Noite - ${day.temp.night} &#176;C</div>
             </div>
             `
         }
